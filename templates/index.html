@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 Ultimate AGI System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🧠 Ultimate AGI Multi-Agent System</h1>
+            <p class="subtitle">11 AI Models • Collective Intelligence • GTX 1650 Optimized</p>
+            <div class="status-bar">
+                <span id="ollama-status" class="status-badge">🔌 Checking Ollama...</span>
+                <span id="gpu-status" class="status-badge">🎮 Checking GPU...</span>
+                <span id="memory-stats" class="status-badge">💾 Loading stats...</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <div class="input-section card">
+                <h2>💭 Ask Your Question</h2>
+                <textarea id="topic-input" placeholder="Enter your question or topic for the AI agents to discuss...
+Example: How to build a neural network from scratch?"></textarea>
+
+                <div class="options">
+                    <label class="checkbox">
+                        <input type="checkbox" id="enable-web" checked>
+                        <span>🌐 Enable Web Search</span>
+                    </label>
+                    <label class="slider-label">
+                        <span>Discussion Turns: <strong id="turns-value">20</strong></span>
+                        <input type="range" id="max-turns" min="5" max="30" value="20">
+                    </label>
+                </div>
+
+                <button id="start-btn" class="btn-primary">
+                    🚀 Start Discussion
+                </button>
+            </div>
+
+            <!-- Progress Section -->
+            <div id="progress-section" class="card" style="display: none;">
+                <h2>⚙️ Discussion Progress</h2>
+                <div id="progress-log" class="progress-log"></div>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Conversation Section -->
+            <div id="conversation-section" class="card" style="display: none;">
+                <h2>💬 Agent Discussion</h2>
+                <div id="conversation" class="conversation"></div>
+            </div>
+
+            <!-- Final Answer Section -->
+            <div id="answer-section" class="card" style="display: none;">
+                <h2>🏆 Final Smart Answer</h2>
+                <div id="final-answer" class="final-answer"></div>
+                <div class="answer-meta">
+                    <span id="answer-quality"></span>
+                    <span id="answer-turns"></span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🔒 Sequential Model Loading • 4GB VRAM Safe • 11 Expert Agents</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

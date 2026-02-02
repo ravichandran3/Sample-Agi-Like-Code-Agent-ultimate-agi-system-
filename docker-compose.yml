@@ -1,0 +1,26 @@
+services:
+  agi-system:
+    build: .
+    container_name: agi-ultimate
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+      - ./sessions:/app/sessions
+    environment:
+      - OLLAMA_HOST=host.docker.internal:11434
+      - FLASK_ENV=production
+      - FLASK_DEBUG=0
+      - PYTHONUNBUFFERED=1
+      - NVIDIA_VISIBLE_DEVICES=all
+    restart: unless-stopped
+    mem_limit: 16g
+    cpus: 4
+    # GPU support for Docker Desktop with WSL2
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
