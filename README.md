@@ -311,10 +311,6 @@ See the [Code Review](file:///C:/Users/ravi/.gemini/antigravity/brain/63e109e2-9
 - [ ] Export conversations to PDF/Markdown
 - [ ] API endpoints for external integration
 
-## 📄 License
-
-[Specify your license here]
-
 ## 🤝 Credits
 
 Built with:
