@@ -1,331 +1,435 @@
-# 🧠 Multi-Agent AGI System
+# 🧠 Ultimate AGI System
 
-A sophisticated multi-agent AI system that orchestrates 11 specialized language models to collaboratively solve complex problems through structured discussions. Optimized for GTX 1650 (4GB VRAM).
+A fully functional Artificial General Intelligence system using 11 local AI models working together through Ollama. Optimized for NVIDIA GTX 1650 4GB VRAM.
 
-## 🌟 Features
+## ✨ Features
 
-- **11 Specialized AI Agents**: Each with unique roles (analyst, creative, engineer, critic, philosopher, etc.)
-- **Intelligent Discussion Management**: Moderator-led collaborative problem-solving
-- **Web Search Integration**: Real-time context from DuckDuckGo
-- **Code Execution**: Safe Python code execution in isolated environment
-- **Long-Term Memory**: SQLite-based persistent storage of conversations and knowledge
-- **Resource Optimization**: Smart GPU/CPU fallback for memory-constrained systems
-- **Real-Time Progress Tracking**: WebSocket-based live updates
-- **Web Interface**: Flask-based UI for easy interaction
+### 🤖 Multi-Model Intelligence
+- **11 AI Models** working collaboratively
+- **Adaptive Mode Selection** - automatically chooses the right approach:
+  - **Instant Mode**: Simple questions (~5 seconds)
+  - **Fast Mode**: Medium complexity (~1.5 minutes, 3 models)
+  - **Full Mode**: Complex tasks (~11 minutes, all 11 models)
 
-## 🏗️ Architecture
+### 🌐 Web Capabilities
+- **URL Reading**: Automatically reads and understands web pages
+- **GitHub Analysis**: Analyzes repository structure and code
+- **Web Search**: DuckDuckGo integration for research
+- **Real-time Web UI**: Flask + SocketIO interface
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Web Interface (Flask)                 │
-│                  Real-time Progress Updates              │
-└─────────────────────┬───────────────────────────────────┘
-                      │
-┌─────────────────────▼───────────────────────────────────┐
-│                  AGI Core System                         │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │  Moderator (qwen3-unfiltered)                    │  │
-│  │  Coordinates discussion & synthesizes results    │  │
-│  └──────────────────────────────────────────────────┘  │
-│                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐ │
-│  │   Analyst    │  │   Creative   │  │   Engineer   │ │
-│  │  (qwen2.5)   │  │ (llama3.2)   │  │(qwen-coder)  │ │
-│  └──────────────┘  └──────────────┘  └──────────────┘ │
-│                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐ │
-│  │    Critic    │  │ Philosopher  │  │  Optimizer   │ │
-│  │  (mistral)   │  │(deepseek-r1) │  │(deepseek-v2) │ │
-│  └──────────────┘  └──────────────┘  └──────────────┘ │
-│                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐ │
-│  │   Logician   │  │ Implementer  │  │   Explorer   │ │
-│  │   (phi4)     │  │(qwen-ablate) │  │(qwen-coder)  │ │
-│  └──────────────┘  └──────────────┘  └──────────────┘ │
-│                                                          │
-│  ┌──────────────┐                                       │
-│  │   Debugger   │                                       │
-│  │(qwen-coder)  │                                       │
-│  └──────────────┘                                       │
-└──────────────────────────────────────────────────────────┘
-         │                    │                    │
-         ▼                    ▼                    ▼
-┌────────────────┐  ┌─────────────────┐  ┌────────────────┐
-│  Web Search    │  │  Code Executor  │  │ Long-Term      │
-│  (DuckDuckGo)  │  │  (Sandboxed)    │  │ Memory (SQLite)│
-└────────────────┘  └─────────────────┘  └────────────────┘
-```
+### 🧩 Intelligence Features
+- **Long-term Memory**: SQLite-based persistent knowledge
+- **RAG (Retrieval-Augmented Generation)**: Ollama embeddings
+- **Peer Teaching**: Agents learn from each other's corrections
+- **Chain-of-Thought Reasoning**: Step-by-step problem solving
+- **Self-Learning**: Gets smarter over time
+
+### 🛠️ Technical Capabilities
+- **Safe Code Execution**: Docker-isolated Python execution
+- **Complexity Detection**: Auto-routes questions to appropriate models
+- **Progress Tracking**: Real-time updates on thinking process
+- **VRAM Optimization**: Sequential model loading for 4GB GPUs
+
+---
 
 ## 📋 Prerequisites
 
-- **Python**: 3.8 or higher
-- **Ollama**: Installed and running ([Download](https://ollama.ai))
-- **GPU**: NVIDIA GTX 1650 (4GB VRAM) or better (optional, falls back to CPU)
+### System Requirements
+- **OS**: Windows, Linux, or macOS
 - **RAM**: 8GB minimum, 16GB recommended
-- **Storage**: ~20GB for all models
+- **GPU**: NVIDIA GTX 1650 (4GB VRAM) or better (optional but recommended)
+- **Storage**: ~30GB for models
+
+### Software Dependencies
+- **Python 3.8+**
+- **Ollama** ([Download](https://ollama.ai/))
+- **Git** (for cloning)
+
+---
 
 ## 🚀 Quick Start
 
 ### 1. Install Ollama
 
-**Windows:**
-```powershell
-# Download from https://ollama.ai/download/windows
-# Run the installer
-```
-
-**Linux/Mac:**
 ```bash
+# Windows/Mac: Download from https://ollama.ai/
+# Linux:
 curl -fsSL https://ollama.ai/install.sh | sh
 ```
 
 ### 2. Pull Required Models
 
 ```bash
-# Core models (required)
+# Core models (required for full system)
 ollama pull qwen3-unfiltered:latest
-ollama pull qwen2.5:7b
-ollama pull llama3.2-uncensored:3b
+ollama pull qwen2.5-coder:7b
 ollama pull qwen2.5-coder:3b
-ollama pull mistral-nemo-uncensored:latest
-
-# Advanced models (optional)
-ollama pull deepseek-r1:7b
+ollama pull mtaylor91/llama3.2-uncensored:3b
+ollama pull gdisney/mistral-nemo-uncensored:latest
+ollama pull deepseek-r1:14b
 ollama pull deepseek-coder-v2:lite
 ollama pull phi4-mini-reasoning:latest
 ollama pull huihui_ai/qwen2.5-coder-abliterate:7b-instruct
-ollama pull qwen2.5-coder:7b
+ollama pull WhiteRabbitNeo/WhiteRabbitNeo-2.5-Qwen-2.5-Coder-7B:latest
+ollama pull hf.co/mradermacher/Qwen2.5-7B-Instruct-1M-abliterated-GGUF:Q6_K
+
+# For RAG (embeddings)
+ollama pull nomic-embed-text
+
+# Optional: For vision capabilities
+ollama pull llava:latest
 ```
 
-### 3. Install Python Dependencies
+### 3. Clone and Setup
 
 ```bash
-cd "e:\Ai model plus code\centralized model from all model script answers\Agi system"
+git clone <your-repo-url>
+cd "Agi system"
+
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# Windows:
+venv\Scripts\activate
+# Linux/Mac:
+source venv/bin/activate
+
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 4. Run the System
+### 4. Run AGI
 
-**Option A: Web Interface (Recommended)**
+#### Option A: Interactive CLI (Smart Mode)
+```bash
+python agi_smart.py
+```
+
+#### Option B: Web Interface
 ```bash
 python app.py
-```
-Then open: `http://localhost:5000`
-
-**Option B: Direct Python Usage**
-```python
-from agi_core import AGISystemWeb
-
-def progress_callback(data):
-    print(f"[{data['timestamp']}] {data['message']}")
-
-agi = AGISystemWeb(progress_callback=progress_callback)
-result = agi.run_discussion(
-    topic="Explain quantum computing in simple terms",
-    max_turns=15,
-    enable_web=True
-)
-
-print("\n=== Final Answer ===")
-print(result['final_answer'])
+# Open browser to http://localhost:5000
 ```
 
-## 🐳 Docker Deployment (Optional)
+#### Option C: Specific Modes
 
+**Fast Mode (3B models only)**
 ```bash
-# Build the image
-docker-compose build
-
-# Run the container
-docker-compose up -d
-
-# Access at http://localhost:5000
+python agi_realistic.py
 ```
 
-## 📁 Project Structure
-
-```
-Agi system/
-├── agi_core.py           # Core AGI system logic
-├── app.py                # Flask web application
-├── requirements.txt      # Python dependencies
-├── Dockerfile            # Docker configuration
-├── docker-compose.yml    # Docker Compose setup
-├── data/                 # SQLite database storage
-│   └── agi_memory.db     # Persistent memory
-├── sessions/             # Flask session data
-├── static/               # Web UI assets
-│   ├── css/
-│   └── js/
-└── templates/            # HTML templates
-    └── index.html
+**Full Mode (All 11 models)**
+```bash
+python agi_all_11_models.py
 ```
 
-## 🎯 Agent Roles & Expertise
+**Instant Mode (Single fast model with RAG)**
+```bash
+python agi_core_instant.py
+```
 
-| Agent | Model | Role | Expertise | Priority |
-|-------|-------|------|-----------|----------|
-| **Moderator** | qwen3-unfiltered | Coordinates discussion | Synthesis, coordination | 10 |
-| **Analyst** | qwen2.5:7b | Data-driven analysis | Analysis, research | 8 |
-| **Creative** | llama3.2-uncensored | Unconventional ideas | Creativity, brainstorming | 6 |
-| **Engineer** | qwen2.5-coder:3b | Practical implementation | Coding, systems | 9 |
-| **Critic** | mistral-nemo | Challenges assumptions | Critique, quality | 7 |
-| **Philosopher** | deepseek-r1:7b | Explores deeper meaning | Ethics, reasoning | 5 |
-| **Optimizer** | deepseek-coder-v2 | Efficiency-focused | Optimization | 8 |
-| **Logician** | phi4-mini | Step-by-step reasoning | Logic, verification | 9 |
-| **Implementer** | qwen-abliterate | Writes code examples | Coding | 7 |
-| **Explorer** | qwen2.5-coder:3b | Researches alternatives | Research | 6 |
-| **Debugger** | qwen2.5-coder:7b | Finds errors | Debugging | 9 |
+---
 
 ## 💡 Usage Examples
 
-### Example 1: Technical Question
+### Simple Question
 ```python
-result = agi.run_discussion(
-    topic="How do I optimize a Python web scraper for 10,000 URLs?",
-    max_turns=20,
-    enable_web=True
-)
+from agi_smart import SmartHybridAGI
+
+agi = SmartHybridAGI()
+answer = agi.ask("What is 2+2?")
+# Uses: Instant mode (~5 seconds)
 ```
 
-### Example 2: Creative Problem
+### URL Analysis
 ```python
-result = agi.run_discussion(
-    topic="Design a sustainable urban transportation system for 2030",
-    max_turns=15,
-    enable_web=True
-)
+answer = agi.ask("What is this article about? https://example.com/article")
+# Automatically reads and analyzes the webpage
 ```
 
-### Example 3: Code Review
+### Complex Research
 ```python
-result = agi.run_discussion(
-    topic="Review this code and suggest improvements: [paste code]",
-    max_turns=10,
-    enable_web=False
-)
+answer = agi.ask("Explain quantum computing and compare different qubit implementations")
+# Uses: Full AGI mode with all 11 models (~11 minutes)
 ```
+
+### GitHub Repository Analysis
+```python
+answer = agi.ask("What is https://github.com/microsoft/vscode? Explain the architecture")
+# Analyzes repository structure, README, and provides insights
+```
+
+---
+
+## 🏗️ Architecture
+
+### System Components
+
+```
+agi_system/
+├── agi_smart.py              # Main entry - adaptive complexity routing
+├── agi_core_instant.py       # Fast mode with RAG and reasoning
+├── agi_realistic.py          # Medium mode (3B models)
+├── agi_all_11_models.py      # Full mode (all 11 models)
+├── agi_core.py               # Web-optimized with callbacks
+├── agi_core_full.py          # Complete system with all features
+├── app.py                    # Flask web interface
+├── complexity_analyzer.py    # Question complexity detection
+└── data/
+    └── agi_memory.db         # Long-term memory database
+```
+
+### Model Roles
+
+Each AI model has a specialized role:
+
+| Model | Role | Expertise |
+|-------|------|-----------|
+| qwen3-unfiltered | Moderator | Coordination, synthesis |
+| qwen2.5-coder:7b | Analyst | Code analysis, debugging |
+| llama3.2-uncensored:3b | Creative | Novel solutions, creativity |
+| qwen2.5-coder:3b | Engineer | Implementation, coding |
+| mistral-nemo-uncensored | Critic | Quality check, improvement |
+| deepseek-r1:14b | Philosopher | Deep reasoning, ethics |
+| deepseek-coder-v2:lite | Optimizer | Performance, efficiency |
+| phi4-mini-reasoning | Logician | Logical reasoning, math |
+| qwen2.5-coder-abliterate | Implementer | Practical solutions |
+| WhiteRabbitNeo | Explorer | Novel approaches, research |
+| Qwen2.5-abliterated | Debugger | Error detection, fixes |
+
+---
 
 ## ⚙️ Configuration
 
 ### Environment Variables
 
 ```bash
-# Ollama host (default: localhost:11434)
+# Ollama configuration
 export OLLAMA_HOST="localhost:11434"
 
-# Database path (default: ./data/agi_memory.db)
-export AGI_DB_PATH="./data/agi_memory.db"
-
-# Flask settings
-export FLASK_ENV="production"
-export FLASK_SECRET_KEY="your-secret-key-here"
+# For Docker deployment
+export OLLAMA_HOST="host.docker.internal:11434"
 ```
 
-### Model Configuration
+### Performance Tuning
 
-Edit `agi_core.py` to customize model parameters:
+**For 4GB VRAM (GTX 1650)**:
+- Use `agi_realistic.py` (fast 3B models only)
+- Sequential model loading only
+- Default timeout: 120 seconds
 
-```python
-MODEL_CONFIG = {
-    "context_window": 1024,      # Tokens for context
-    "temperature": 0.8,          # Creativity (0.0-1.0)
-    "request_timeout": 400,      # Seconds
-    "num_threads": 4             # CPU threads
-}
-```
-
-## 🔧 Troubleshooting
-
-### Issue: "Model not found"
-```bash
-# Pull the missing model
-ollama pull <model-name>
-```
-
-### Issue: "Out of memory" / GPU errors
-- System automatically falls back to CPU
-- Reduce `max_turns` parameter
-- Close other GPU-intensive applications
-
-### Issue: Web search returns no results
-- DuckDuckGo API can be unreliable
-- Set `enable_web=False` to disable web search
-- Check internet connection
-
-### Issue: Database locked
-- Close other instances of the application
-- Delete `data/agi_memory.db.lock` if exists
-
-### Issue: Slow performance
-- Reduce number of agents in `AGENTS` list
-- Increase `keep_alive` duration to keep models loaded
-- Use smaller models (3B instead of 7B)
-
-## 📊 Performance Tips
-
-1. **Keep frequently-used models loaded**: Set `keep_alive: "5m"` instead of `0`
-2. **Increase context window**: Change `num_ctx: 4096` for better context
-3. **Reduce max_turns**: Use 10-15 turns instead of 20 for faster results
-4. **Disable web search**: Set `enable_web=False` for offline usage
-
-## 🔒 Security Notes
-
-⚠️ **Code Execution Warning**: The `DockerSafeExecutor` can execute arbitrary Python code. Only use in trusted environments.
-
-**Recommendations**:
-- Run in Docker container for isolation
-- Don't expose to public internet without authentication
-- Review generated code before execution
-- Set resource limits in production
-
-## 🛠️ Development
-
-### Running Tests
-```bash
-# (Tests not yet implemented)
-pytest tests/
-```
-
-### Contributing
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## 📝 Known Issues
-
-- ⚠️ **Windows Compatibility**: Some process management code is Linux-specific (see [code_review.md](file:///C:/Users/ravi/.gemini/antigravity/brain/63e109e2-9990-4610-8b90-1564c57caef0/code_review.md))
-- ⚠️ **Thread Safety**: SQLite operations may need locking for high concurrency
-- ⚠️ **Web Search**: DuckDuckGo API can be unreliable
-
-See the [Code Review](file:///C:/Users/ravi/.gemini/antigravity/brain/63e109e2-9990-4610-8b90-1564c57caef0/code_review.md) for detailed analysis.
-
-## 📈 Roadmap
-
-- [ ] Fix Windows compatibility issues
-- [ ] Add authentication for web interface
-- [ ] Implement agent performance tracking
-- [ ] Add more search providers (Brave, SerpAPI)
-- [ ] Support for image/video models
-- [ ] Export conversations to PDF/Markdown
-- [ ] API endpoints for external integration
-
-## 🤝 Credits
-
-Built with:
-- [Ollama](https://ollama.ai) - Local LLM runtime
-- [Flask](https://flask.palletsprojects.com/) - Web framework
-- [SQLite](https://www.sqlite.org/) - Database
-- Various open-source LLMs (Qwen, LLaMA, Mistral, DeepSeek, Phi)
-
-## 📞 Support
-
-For issues and questions:
-- Check the [Code Review](file:///C:/Users/ravi/.gemini/antigravity/brain/63e109e2-9990-4610-8b90-1564c57caef0/code_review.md) for known issues
-- Review troubleshooting section above
-- Open an issue on GitHub (if applicable)
+**For 8GB+ VRAM**:
+- Can use `agi_all_11_models.py`
+- Parallel model preloading enabled
+- Increased timeout: 180 seconds
 
 ---
 
-**Made with 🧠 by [Ravichandran]**
+## 🐳 Docker Deployment
+
+```bash
+# Build and run
+docker-compose up --build
+
+# Access web UI
+http://localhost:5000
+```
+
+**Note**: Ensure Ollama is accessible from Docker container using `host.docker.internal`.
+
+---
+
+## 🧪 Testing
+
+### Test URL Reading
+```bash
+python test_agi_url.py
+```
+
+### Test Multi-Model System
+```bash
+python test_agi.py
+```
+
+### Test Smart Routing
+```bash
+python test_smart.py
+```
+
+---
+
+## 📊 Performance Benchmarks
+
+| Mode | Models | Avg Time | Best For |
+|------|--------|----------|----------|
+| Instant | 1 (+ RAG) | ~5s | Math, facts, simple queries |
+| Fast | 3 (3B) | ~1.5min | General questions |
+| Full | 11 (mixed) | ~11min | Complex analysis, research |
+
+---
+
+## 🔧 Troubleshooting
+
+### Ollama Connection Issues
+```bash
+# Check if Ollama is running
+ollama list
+
+# Test connection
+curl http://localhost:11434/api/tags
+```
+
+### VRAM Out of Memory
+- Use `agi_realistic.py` instead of `agi_all_11_models.py`
+- Reduce number of models
+- Ensure sequential loading (not parallel)
+
+### Slow Response Times
+- Check GPU utilization
+- Reduce `max_turns` parameter
+- Use smaller models (3B instead of 7B)
+
+### URL Reading Fails
+- Check internet connection
+- Verify URL is accessible
+- Some sites may block scraping
+
+---
+
+## 🛣️ Roadmap
+
+### Completed ✅
+- [x] Multi-model collaboration (11 models)
+- [x] URL reading and web scraping
+- [x] Long-term memory system
+- [x] RAG with embeddings
+- [x] Web interface
+- [x] Adaptive complexity detection
+
+### In Progress 🚧
+- [ ] Advanced tool system (file ops, system commands)
+- [ ] Vision capabilities (image analysis)
+- [ ] Task planning and execution
+
+### Planned 📋
+- [ ] Audio processing (speech-to-text)
+- [ ] Plugin system
+- [ ] REST API
+- [ ] Mobile app
+
+---
+
+## 📖 API Reference
+
+### SmartHybridAGI
+
+```python
+from agi_smart import SmartHybridAGI
+
+agi = SmartHybridAGI()
+
+# Ask a question
+answer = agi.ask(question: str) -> str
+```
+
+### TrueAGI (Instant Mode)
+
+```python
+from agi_core_instant import TrueAGI
+
+agi = TrueAGI()
+
+# Think and respond
+answer = agi.think(question: str) -> str
+
+# Read URL
+content = agi.read_url(url: str) -> str
+
+# Read GitHub repo
+content = agi.read_github_repo(url: str) -> str
+```
+
+### MaxSpeedAGI (Full Mode)
+
+```python
+from agi_all_11_models import MaxSpeedAGI
+
+agi = MaxSpeedAGI()
+
+# All 11 models discuss
+answer = agi.discuss(question: str) -> str
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Areas for improvement:
+- New AI model integrations
+- Tool implementations
+- Performance optimizations
+- Documentation improvements
+- Bug reports and fixes
+
+---
+
+## 📄 License
+
+[Specify your license here]
+
+---
+
+## 🙏 Acknowledgments
+
+- **Ollama** - Local LLM runtime
+- **LangChain** - AI framework inspiration
+- **All AI Model Creators** - For the amazing models
+- **Community** - For feedback and contributions
+
+---
+
+## 📞 Support
+
+- **Issues**: Create an issue on GitHub
+- **Discussions**: Join community discussions
+- **Documentation**: Check the wiki
+
+---
+
+## ⚠️ Important Notes
+
+- This system requires significant computational resources
+- Some models may have usage restrictions
+- Web scraping should respect robots.txt
+- Always verify AI outputs for critical applications
+- The system learns from interactions - quality improves over time
+
+---
+
+## 🎯 Example Use Cases
+
+### Research Assistant
+```python
+agi.ask("Research the latest developments in quantum computing and summarize key breakthroughs")
+```
+
+### Code Analysis
+```python
+agi.ask("Analyze this repository: https://github.com/user/repo and suggest improvements")
+```
+
+### Learning Aid
+```python
+agi.ask("Explain neural networks like I'm 10 years old")
+```
+
+### Problem Solving
+```python
+agi.ask("I have a Python error: [error message]. How do I fix it?")
+```
+
+---
+
+**Built with 🧠 by combining the power of 11 AI models**
+"# agi-start" 
